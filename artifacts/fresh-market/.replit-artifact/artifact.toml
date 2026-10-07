@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Fresh Market"
+description = "A friendly grocery store website for browsing product departments and discovering current deals. It showcases products without prices, cart, or online ordering."
+version = "1.0.0"
+id = "artifacts/fresh-market"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22385
+
+[services.development]
+run = "pnpm --filter @workspace/fresh-market run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/fresh-market", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/fresh-market/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22385"
+BASE_PATH = "/"

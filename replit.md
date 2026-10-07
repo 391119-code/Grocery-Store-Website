@@ -1,6 +1,6 @@
-# [Project name]
+# Fresh Market
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A browse-only grocery showcase for product departments and weekly in-store deals.
 
 ## Run & Operate
 
@@ -22,15 +22,18 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/fresh-market/src/App.tsx` — storefront content, product catalog, category filters, and weekly finds
+- `artifacts/fresh-market/src/index.css` — storefront styling and responsive layout
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The storefront is a static, front-end showcase; it does not use the API server or database.
+- Products and weekly finds are browsing content only; there is no pricing, cart, checkout, or online ordering.
+- Store location, hours, and product/deal copy are sample content and should be confirmed before publishing.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Visitors can browse grocery departments, search and filter example products, and see weekly in-store highlights. Purchases happen in person, not through the website.
 
 ## User preferences
 
