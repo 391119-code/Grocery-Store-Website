@@ -10,22 +10,23 @@ import { ArrowDown, ArrowRight, ArrowUpRight, Clock3, Leaf, MapPin, Menu, Search
 const queryClient = new QueryClient();
 
 const departments = [
-  { name: 'Fruits', count: '16 picks', color: '#dce8cf', mark: '01' },
-  { name: 'Vegetables', count: '22 picks', color: '#d7e4cf', mark: '02' },
-  { name: 'Bakery', count: '12 picks', color: '#f1d8b9', mark: '03' },
-  { name: 'Dairy & eggs', count: '16 picks', color: '#e8e6d7', mark: '04' },
-  { name: 'Meat & seafood', count: '10 picks', color: '#eed1c6', mark: '05' },
-  { name: 'Pantry', count: '24 picks', color: '#eee2ac', mark: '06' },
-  { name: 'Frozen', count: '9 picks', color: '#d5e5e7', mark: '07' },
-  { name: 'Snacks & drinks', count: '25 picks', color: '#d9e3c8', mark: '08' },
+  { name: 'Fruits', color: '#dce8cf', mark: '01' },
+  { name: 'Vegetables', color: '#d7e4cf', mark: '02' },
+  { name: 'Bakery', color: '#f1d8b9', mark: '03' },
+  { name: 'Dairy & eggs', color: '#e8e6d7', mark: '04' },
+  { name: 'Meat & seafood', color: '#eed1c6', mark: '05' },
+  { name: 'Pantry', color: '#eee2ac', mark: '06' },
+  { name: 'Frozen', color: '#d5e5e7', mark: '07' },
+  { name: 'Snacks & drinks', color: '#d9e3c8', mark: '08' },
 ];
 
-const products = [
+const sampleProducts = [
   { name: 'Sunrise heirloom tomatoes', detail: 'Grown nearby · Just picked', category: 'Vegetables', tone: 'tomato', tag: 'LOCAL FAVORITE', shape: 'tomato' },
   { name: 'Honeycrisp apples', detail: 'Crisp, sweet & orchard-fresh', category: 'Fruits', tone: 'apple', tag: 'IN SEASON', shape: 'apple' },
   { name: 'Orchard Bartlett pears', detail: 'Sweet, tender & grown nearby', category: 'Fruits', tone: 'pear', tag: 'IN SEASON', shape: 'pear' },
   { name: 'Sun-ripened strawberries', detail: 'Bright, juicy & picked this morning', category: 'Fruits', tone: 'berries', tag: 'FARM FRESH', shape: 'berries' },
-  { name: 'Tender baby spinach', detail: 'Washed greens from local growers', category: 'Vegetables', tone: 'greens', tag: 'LOCAL FAVORITE', shape: 'greens' },
+  { name: 'Spinach', detail: 'Fresh leafy greens', category: 'Vegetables', tone: 'greens', tag: 'FRESH PRODUCE', shape: 'greens' },
+  { name: 'Baby spinach', detail: 'Fresh leafy greens', category: 'Vegetables', tone: 'greens', tag: 'FRESH PRODUCE', shape: 'greens' },
   { name: 'Sweet summer corn', detail: 'Golden ears, ready for the grill', category: 'Vegetables', tone: 'corn', tag: 'IN SEASON', shape: 'corn' },
   { name: 'Wildflower sourdough', detail: 'Slow-fermented · Baked at 6am', category: 'Bakery', tone: 'bread', tag: 'BAKED TODAY', shape: 'bread' },
   { name: 'Cream-top whole milk', detail: 'Glass-bottled · Meadowbrook Farm', category: 'Dairy & eggs', tone: 'milk', tag: 'LOCAL FAVORITE', shape: 'milk' },
@@ -35,6 +36,71 @@ const products = [
   { name: 'Garden herb dumplings', detail: 'Ready in minutes · 8 pieces', category: 'Frozen', tone: 'frozen', tag: 'NEW IN', shape: 'dumpling' },
   { name: 'Sea salt kettle chips', detail: 'Small batch · Extra crunchy', category: 'Snacks & drinks', tone: 'chips', tag: 'NEIGHBOR PICK', shape: 'chips' },
   { name: 'Ginger peach kombucha', detail: 'Bright, bubbly & brewed nearby', category: 'Snacks & drinks', tone: 'drink', tag: 'LOCAL FAVORITE', shape: 'drink' },
+];
+
+const highlightedProduce = [
+  {
+    category: 'Fruits',
+    names: [
+      'Braeburn apples', 'Fuji apples', 'Gala apples', 'Golden Delicious apples',
+      'Granny Smith apples', 'Pink Lady apples', 'Red Delicious apples',
+      'Apricots', 'Large avocados', 'Hass avocados', 'Bananas', 'Red cherries',
+      'Dragon fruit', 'Grapefruit', 'Grapefruit pomelo', 'Black grapes',
+      'Flame grapes', 'Green grapes', 'Jujubes', 'Kiwis', 'Lemons', 'Limes',
+      'Mangoes', 'Manila mangoes', 'Afghani melons', 'Galia melons',
+      'Cantaloupes', 'Honeydew melons', 'Nectarines', 'White nectarines',
+      'Oranges', 'Green olives', 'Maradol papaya', 'Peaches', 'Donut peaches',
+      'White peaches', 'Asian peaches', 'Anjou pears', 'Forelle pears',
+      'Pineapple', 'Black plums', 'Golden plums', 'Green plums', 'Red plums',
+      'Italian plums', 'Pomegranates', 'Quince', 'Satsuma tangerines',
+      'Tamarindo', 'Watermelon seeds', 'Baby watermelons',
+    ],
+  },
+  {
+    category: 'Vegetables',
+    names: [
+      'Asparagus', 'Green beans', 'Brussels sprouts', 'Baby bok choy',
+      'Broccoli', 'Green cabbage', 'Napa cabbage', 'Red cabbage', 'Chives',
+      'Yellow corn', 'Beets', 'Cauliflower', 'Celery', 'Cilantro', 'American cucumbers',
+      'Armenian cucumbers', 'Mediterranean cucumbers', 'Dandelion greens',
+      'Dill', 'Baby grafted eggplant', 'American eggplant',
+      'Baby Indian eggplant', 'Chinese eggplant', 'Italian eggplant', 'Garlic',
+      'Ginger', 'Turnip greens', 'Jicama', 'Kale', 'Leeks', 'Iceberg lettuce',
+      'Romaine lettuce', 'Mint', 'Mushrooms', 'Okra', 'Boiler onions',
+      'Brown onions', 'Green onions', 'Mexican green onions', 'Red onions',
+      'Shallots', 'White onions', 'Oregano', 'American parsley',
+      'Italian parsley', 'Anaheim peppers', 'Green bell peppers',
+      'Habanero peppers', 'Red Fresno peppers', 'Jalapeño peppers',
+      'Orange bell peppers', 'Pasilla peppers', 'Red bell peppers',
+      'Serrano peppers', 'Thai chili peppers', 'Yellow bell peppers',
+      'Yellow chili peppers', 'Purple potatoes', '5 lb bag potatoes',
+      '10 lb bag potatoes', 'Red potatoes', 'Russet potatoes',
+      'Sweet potatoes', 'White potatoes', 'Radish', 'Rosemary',
+      'Butternut squash', 'Chayote squash', 'Kabocha squash',
+      'Mexican squash', 'Opo squash', 'Spaghetti squash', 'Yellow squash',
+      'Zucchini', 'Swiss chard', 'Iraqi Swiss chard', 'Sunchoke', 'Sage', 'Tarey', 'Taro root',
+      'Tarragon', 'Tomatillos', 'Cluster tomatoes', 'Red tomatoes',
+      'Roma tomatoes', 'Turnips', 'Turmeric', 'Thyme', 'Verdolagas',
+      'Watercress', 'Yams',
+    ],
+  },
+] as const;
+
+const highlightedProduceProducts = highlightedProduce.flatMap(({ category, names }) =>
+  names.map((name) => ({
+    name,
+    detail: 'Fresh produce selection',
+    category,
+    tone: category === 'Fruits' ? 'apple' : 'greens',
+    tag: 'FRESH PRODUCE',
+    shape: category === 'Fruits' ? 'apple' : 'greens',
+  })),
+);
+
+const sampleProductNames = new Set(sampleProducts.map((item) => item.name.toLowerCase()));
+const products = [
+  ...sampleProducts,
+  ...highlightedProduceProducts.filter((item) => !sampleProductNames.has(item.name.toLowerCase())),
 ];
 
 const deals = [
@@ -119,7 +185,7 @@ function Home() {
         <div className="department-grid">
           {departments.map((dep, index) => <button className={`department-tile tile-${index + 1}`} key={dep.name} onClick={() => { setActive(dep.name); goTo('market'); }} style={{ '--tile-color': dep.color } as CSSProperties} data-testid={`button-department-${dep.name.toLowerCase().replaceAll(' ', '-')}`}>
             <span className="tile-mark">{dep.mark}</span><span className={`tile-illustration illustration-${index + 1}`}><i /><b /></span>
-            <span className="tile-label">{dep.name}</span><span className="tile-count">{dep.count}<ArrowUpRight size={14} /></span>
+            <span className="tile-label">{dep.name}</span><span className="tile-count">{products.filter((item) => item.category === dep.name).length} listed<ArrowUpRight size={14} /></span>
           </button>)}
         </div>
       </section>
